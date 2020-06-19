@@ -1,0 +1,32 @@
+{
+  "name": "tushare-api",
+  "version": "0.1.0",
+  "repository": "git@github.com:TqLj/tushare-api.git",
+  "author": "6du@protonmail.com",
+  "license": "MPL-2.0",
+  "exports":{
+    ".": "./lib/index.js",
+    "./":"./lib/"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "ava": "^3.9.0",
+    "coffeescript": "^2.5.1"
+  },
+  "scripts": {
+    "compile": "coffee --compile --output lib/ src/",
+    "prepare": "npm run compile",
+    "dev": "npx ava --watch --verbose",
+    "test": "npx ava"
+  },
+  "ava": {
+    "extensions": [
+      "coffee"
+    ],
+    "require": [
+      "coffeescript/register"
+    ]
+  }
+}
