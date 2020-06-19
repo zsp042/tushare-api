@@ -33,7 +33,7 @@ class Api
           t.push i[p]
         items.push t
       d.items = items
-    data
+    data.data
 
 
 module.exports = ->
