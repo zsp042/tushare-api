@@ -1,5 +1,9 @@
-#!/usr/bin/env coffee
 axios = require 'axios'
+chalk = require 'chalk'
+
+sleep = (ms)=>
+  new Promise((resolve) => setTimeout(resolve, ms))
+
 
 class Api
   constructor:(@token, @url="https://api.waditu.com/")->
@@ -19,8 +23,16 @@ class Api
     )
     if status != 200
       throw new Error(data)
-    if data.code
-      throw data
+    {code} = data
+    if code
+      if code == 40203
+        console.log chalk.redBright(data.msg)
+        await sleep(3000)
+        return await @$.apply @,arguments
+      else
+        err = new Error(data.msg)
+        Object.assign(err, data)
+        throw err
     if fields
       d = data.data
       df = d.fields
